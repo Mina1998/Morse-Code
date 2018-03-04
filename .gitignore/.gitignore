@@ -1,0 +1,86 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    char letters[]= {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    string ciphers[]= {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+    string sentence;
+    cout << "\aGood Morning \nWhat do you like to do today ?" << endl;
+    cout << "\t 1. Cipher Message" << endl;
+    cout << "\t 2. Decipher Message" << endl;
+    cout << "\t 3. End" << endl;
+    cout << "\nEnter Your Choice : ";
+    int nChoice ;
+    cin >> nChoice ;
+    cout << endl;
+    if (nChoice==1)
+    {
+        cout << "Enter the Message to Cipher : ";
+        cin.ignore();
+        getline(cin,sentence);
+        cout << "\n The Ciphered Message is : ";
+        for (int i=0; i<sentence.size(); i++)
+        {
+            sentence[i]=char(tolower(sentence[i]));
+            if (sentence[i]==' '){
+                cout << "  ";
+                continue;
+            }
+            for (int k=0; k<27; k++)
+            {
+                if (sentence[i]==letters[k]){
+                    cout << ciphers[k] << " ";
+                }
+            }
+        }
+    }
+    cout << endl;
+
+	int coun = 0;
+    string word;
+    if (nChoice==2)
+    {
+        cin.ignore();
+        cout << "Enter a space between each ciphered letters and 3 spaces between each ciphered words\n";
+        cout << "Enter the Ciphered Message : ";
+        getline(cin,sentence);
+        int coun=0;
+        cout << "The Deciphered Message is : ";
+        for (int i=0;i<sentence.size();i++)
+        {
+			while (sentence[i] != ' ' && i < sentence.size())
+			{
+				word += sentence[i];
+				i++;
+			}
+			for (int k = 0; k<26; k++)
+			{
+				if (word == ciphers[k])
+				{
+					cout << letters[k];
+					word.clear();
+					break;
+				}
+			}
+			while (sentence[i] == ' '&& i < sentence.size())
+			{
+				coun++; i++;
+			}
+			if (coun == 3)cout << " ";
+			coun = 0;
+			i--;
+        }
+    }
+	cout << endl;
+
+	if (nChoice==3)
+    {
+        cout << "Good Bye " << endl;
+        return 0;
+    }
+    return 0;
+
+    }
+
